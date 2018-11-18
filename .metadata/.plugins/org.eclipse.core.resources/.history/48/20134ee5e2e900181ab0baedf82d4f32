@@ -1,0 +1,268 @@
+package ui;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import ConexionDatabase.ConexionPrevilegio;
+import ConexionDatabase.ConexionUser;
+import model.Encrypt;
+import model.Previlegio;
+import model.Usuarios;
+import utils.Conexion;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.nio.file.attribute.UserPrincipalLookupService;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import java.awt.Font;
+import javax.swing.JCheckBox;
+import java.awt.Checkbox;
+import java.awt.Choice;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
+
+public class JDSign_up extends JDialog implements ActionListener, KeyListener, FocusListener {
+	private JLabel lblUsuario;
+	private JLabel lblContrasea;
+	private JLabel lblConfirmarContrasea;
+	private JLabel lblNombre;
+	private JLabel lblCorreo;
+	private JLabel lblApellido;
+	private JTextField txtUser;
+	private JTextField txtCorreo;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JButton btnRegistrar;
+	private JPasswordField txtPassword;
+	private JPasswordField txtPasswordConfirm;
+	
+	
+	ConexionUser users= new ConexionUser();
+	
+	private JLabel lblRegistroDeNuevo;
+	private JButton btnLimpiar;
+	private JLabel lblTipoDePrevilegio;
+	private JComboBox cboPrivilegio;
+	
+	private int form;
+	public final static int REGISTRAR = 0;
+	public final static int NOTREGISTRAR = 0;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			JDSign_up dialog = new JDSign_up();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public JDSign_up() {
+		setBounds(100, 100, 389, 340);
+		getContentPane().setLayout(null);
+		
+		lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(28, 49, 72, 14);
+		getContentPane().add(lblUsuario);
+		
+		lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea.setBounds(28, 74, 89, 14);
+		getContentPane().add(lblContrasea);
+		
+		lblConfirmarContrasea = new JLabel("<html>Confirmar Contrase\u00F1a:</html>");
+		lblConfirmarContrasea.setBounds(28, 99, 89, 28);
+		getContentPane().add(lblConfirmarContrasea);
+		
+		lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(28, 163, 72, 14);
+		getContentPane().add(lblNombre);
+		
+		lblCorreo = new JLabel("Correo:");
+		lblCorreo.setBounds(28, 138, 72, 14);
+		getContentPane().add(lblCorreo);
+		
+		lblApellido = new JLabel("Apellido:");
+		lblApellido.setBounds(28, 188, 72, 14);
+		getContentPane().add(lblApellido);
+		
+		txtUser = new JTextField();
+		txtUser.setBounds(110, 46, 153, 20);
+		getContentPane().add(txtUser);
+		txtUser.setColumns(10);
+		
+		txtCorreo = new JTextField();
+		txtCorreo.setBounds(110, 132, 153, 20);
+		getContentPane().add(txtCorreo);
+		txtCorreo.setColumns(10);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(110, 160, 215, 20);
+		getContentPane().add(txtNombre);
+		txtNombre.setColumns(10);
+		
+		txtApellido = new JTextField();
+		txtApellido.setBounds(110, 185, 215, 20);
+		getContentPane().add(txtApellido);
+		txtApellido.setColumns(10);
+		
+		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setEnabled(false);
+		btnRegistrar.addActionListener(this);
+		btnRegistrar.setBounds(174, 267, 89, 23);
+		getContentPane().add(btnRegistrar);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(110, 71, 153, 20);
+		getContentPane().add(txtPassword);
+		
+		txtPasswordConfirm = new JPasswordField();
+		txtPasswordConfirm.addFocusListener(this);
+		txtPasswordConfirm.addKeyListener(this);
+		txtPasswordConfirm.setBounds(110, 102, 153, 20);
+		getContentPane().add(txtPasswordConfirm);
+		
+		lblRegistroDeNuevo = new JLabel("Registro de Nuevo Usuario");
+		lblRegistroDeNuevo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRegistroDeNuevo.setBounds(61, 11, 264, 27);
+		getContentPane().add(lblRegistroDeNuevo);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(this);
+		btnLimpiar.setBounds(45, 267, 89, 23);
+		getContentPane().add(btnLimpiar);
+		
+		lblTipoDePrevilegio = new JLabel("<html>Tipo de Previlegio<html>");
+		lblTipoDePrevilegio.setBounds(28, 213, 72, 28);
+		getContentPane().add(lblTipoDePrevilegio);
+		
+		cboPrivilegio = new JComboBox();
+		cboPrivilegio.setBounds(110, 216, 137, 20);
+		getContentPane().add(cboPrivilegio);
+		ConexionPrevilegio Cperm = new ConexionPrevilegio();
+		Cperm.TipPrev(cboPrivilegio);
+		
+		
+		
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnLimpiar) {
+			actionPerformedBtnLimpiar(arg0);
+		}
+		if (arg0.getSource() == btnRegistrar) {
+			actionPerformedBtnRegistrar(arg0, rootPaneCheckingEnabled);
+		}
+		
+	}
+	protected void actionPerformedBtnRegistrar(ActionEvent arg0,boolean a) {
+		
+		//String pwd= new String(txtPassword.getPassword());
+		//String pwdEncrypt = Encrypt.sha1(pwd);
+		
+		if (leerPwd().equals(leerPwdCofirm())) {
+			String pwdEncrypt = Encrypt.sha1(leerPwd());
+			Usuarios newUser= new Usuarios(0, leerUser(), pwdEncrypt, leerCorreo(), leerNomUser(), leerApeUser(),leerLastSigIn(),leerTipo() );
+			int valor=users.Sign_Up(newUser);
+			if (valor==1) {
+				System.out.println("Registrado");
+			
+			} else {
+				System.out.println("error de Registrado");
+			}
+		}else{
+			System.out.println("Contraseña incoorecta");
+		}
+		
+		
+	}
+	
+
+	String leerNomPerm() {
+		// TODO Auto-generated method stub
+		return  "s";
+	}
+
+	String leerUser() {
+		return txtUser.getText();
+	}
+	String leerPwd(){
+		String pwd = new String(txtPassword.getPassword());
+		return pwd;
+	}
+	String leerPwdCofirm(){
+		String pwdC = new String(txtPasswordConfirm.getPassword());
+		return pwdC;
+	}
+	String leerCorreo(){
+		return txtCorreo.getText();
+	}
+	String leerNomUser(){
+		return txtNombre.getText();
+	}
+	String leerApeUser(){
+		return txtApellido.getText();
+	}
+	String leerLastSigIn(){
+		Date d = new Date();
+		DateFormat f1= DateFormat.getDateInstance();
+		String date= f1.format(d);
+		return date;
+	}
+	int leerTipo(){
+		int tipo = cboPrivilegio.getSelectedIndex();
+		return tipo;
+	}
+	void limpiar(JTextField s){
+		s.setText(null);
+	}
+	protected void actionPerformedBtnLimpiar(ActionEvent arg0) {
+		limpiar(txtUser);
+		limpiar(txtPassword);
+		limpiar(txtPasswordConfirm);
+		limpiar(txtCorreo);
+		limpiar(txtNombre);
+		limpiar(txtApellido);
+		txtUser.requestFocus();
+		cboPrivilegio.setSelectedIndex(0);
+		
+	}
+
+	
+	
+
+	
+	public void focusGained(FocusEvent arg0) {
+		if (arg0.getSource() == txtPasswordConfirm) {
+			focusGainedTxtPasswordConfirm(arg0);
+		}
+	}
+	public void focusLost(FocusEvent arg0) {
+		System.out.println("Fous Lost");
+	}
+	protected void focusGainedTxtPasswordConfirm(FocusEvent arg0) {
+	}
+}
+
+	

@@ -1,0 +1,53 @@
+package model;
+
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
+import util.Conexion;
+
+import java.sql.*;
+
+public class ConexionUser extends Conexion {
+	
+	public boolean Sign_Up(Usuarios user){
+		
+		PreparedStatement ps= null;
+		Connection con = getConexion();
+		
+		String sql="insert into Usuario  values(?,?,?,?,?,?,?,?,?) ";
+		int a = 1;
+		try {
+			ps= con.prepareStatement(sql);
+			ps.setInt(1,user.getId());
+			ps.setString(2,user.getUsuario());
+			ps.setString(3,user.getContraseña());
+			ps.setString(4,user.getCorreo());
+			ps.setString(5,user.getNombre());
+			ps.setString(6,user.getApellido());
+			ps.setString(7,user.getLast_Sign_In());
+			ps.setInt(6,user.getTipo(1));
+			ps.executeQuery();
+			return true;
+			
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,e);
+			return false;
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(null, e2.toString());
+			}
+		}
+		
+		
+		
+	}
+
+}

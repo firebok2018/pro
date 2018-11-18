@@ -1,0 +1,39 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import utils.Conexion;
+
+public class ConexionPrevilegio {
+	public void TipPrev(JComboBox o){
+		DefaultComboBoxModel model;
+		
+		//Conexion con = new Conexion();
+		Statement st= null;
+		Connection cn = null;
+		ResultSet rs = null;
+		try {
+			cn = new Conexion().getConexion();
+			st= cn.createStatement();
+			rs= st.executeQuery("select*from tipo");
+			model = new DefaultComboBoxModel();
+			o.setModel(model);
+			
+			while (rs.next()) {
+				model.addElement(new );
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+}

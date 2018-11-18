@@ -1,0 +1,44 @@
+package model;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.SQLError;
+
+import util.Conexion;
+
+import java.io.Console;
+import java.sql.*;
+
+public class ConexionUser extends Conexion {
+	
+	public boolean Sign_Up(Usuarios user){
+		
+		int valor=-1;
+		Connection con=null;
+		PreparedStatement pstm=null;
+		try {
+			con= new Conexion().getConexion();
+			String sql= "insert into tb_Usuario values (null,?,?,?,?,?,?)";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, user.getUsuario());
+			pstm.setString(2,user.getContraseña());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(null, e2.toString());
+			}
+		}
+		
+		
+		
+	}
+
+}

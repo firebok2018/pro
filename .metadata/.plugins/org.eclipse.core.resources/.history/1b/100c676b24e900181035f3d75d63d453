@@ -1,0 +1,57 @@
+package model;
+
+import javax.swing.JLabel;
+
+import view.JDSign_up;
+
+public class TimerConxion  extends Thread{
+	JLabel time;
+	public TimerConxion(JLabel timer){
+		this.time=timer;
+	}
+	public void run(){
+		try {
+			int x = 0;
+			while (JDSign_up.Time) {
+				Thread.sleep(100);
+				//System.out.println(x);
+				TimeStart(x);
+				x++;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	private void TimeStart(int x) {
+		// TODO Auto-generated method stub
+		//System.out.println(x+ "  "+Thread.currentThread().getName());
+		JDSign_up.segundo++;
+		if (JDSign_up.segundo<59) {
+			JDSign_up.segundo=0;
+			JDSign_up.minuto++;
+			
+		}
+		String txt ="", hora="",min="",seg="";
+		if (JDSign_up.segundo==60) {
+			seg="0"+JDSign_up.segundo;
+		}else {
+			seg=""+JDSign_up.segundo;
+		}
+		if (JDSign_up.minuto==60) {
+			seg="0"+JDSign_up.minuto;
+		}else {
+			seg=""+JDSign_up.minuto;
+		}
+		if (JDSign_up.hora==60) {
+			seg="0"+JDSign_up.hora;
+		}else {
+			seg=""+JDSign_up.hora;
+		}
+	
+		seg+=JDSign_up.segundo;
+		min+=JDSign_up.minuto;
+		String reloj =hora+":"+ min+" : "+seg;
+		time.setText(reloj);
+	}
+	
+}

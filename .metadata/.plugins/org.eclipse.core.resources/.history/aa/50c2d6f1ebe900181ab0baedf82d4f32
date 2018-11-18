@@ -1,0 +1,28 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import model.Usuarios;
+
+public class ConexionSign_In {
+	Statement st= null;
+	Connection cn = null;
+	ResultSet rs = null;
+	public Usuarios SignIn(String usuario, String clave) {
+		 String sql = "select * from tb_Usuario where usuario = ? and clave = ?";
+		 ps = cn.prepareStatement(sql);
+
+		 ps.setString(1, usuario);
+		 ps.setString(2, clave);
+		 
+		return ps;
+
+	}
+
+}
+
+
+

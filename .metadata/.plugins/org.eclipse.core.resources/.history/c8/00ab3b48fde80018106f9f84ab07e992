@@ -1,0 +1,14 @@
+package model;
+
+public class Habilitar {
+	
+	public final static int ADICIONAR = 0;
+	public final static int MODIFICAR = 1;
+	public final static int ELIMINAR= 2;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

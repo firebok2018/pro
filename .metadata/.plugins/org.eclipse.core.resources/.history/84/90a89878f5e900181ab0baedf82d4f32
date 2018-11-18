@@ -1,0 +1,70 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import model.Usuarios;
+import utils.Conexion;
+
+public class ConexionSign_In extends Conexion {
+	
+	public int Sign_In(String user,String pwd){
+		int valor=0;
+		Connection con = null;
+		try {
+			String sql="select*from tb_Usuarios where ";
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return 0;
+		
+	}
+
+    
+    String SSQL="SELECT * FROM usuarios WHERE usuario='"+usuario+"' AND clave=sha1('"+clave+"')";
+
+    Connection conect = null;
+
+    try {
+
+        conect = new Conexion().getConexion();
+        Statement st = conect.createStatement();
+        ResultSet rs = st.executeQuery(SSQL);
+
+        if(rs.next()){
+
+            resultado=1;
+
+        }
+
+    } catch (SQLException ex) {
+
+        JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+
+    }finally{
+
+
+        try {
+
+            conect.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
+return resultado;
+
+}
+
+}
+
+
+

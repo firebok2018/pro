@@ -1,0 +1,16 @@
+package model;
+
+import java.text.DateFormat;
+import java.util.Date;
+
+public class Cliente {
+	private int codigo;
+	private int DNI;
+	private String nombre;
+	private String Apellido;
+	private String Telefono;
+
+
+	
+
+}

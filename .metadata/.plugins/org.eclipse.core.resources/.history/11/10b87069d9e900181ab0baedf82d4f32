@@ -1,0 +1,15 @@
+package model;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import utils.Conexion;
+
+public class ConexionPrevilegio {
+	public void TipPrev(JComboBox o){
+		DefaultComboBoxModel model;
+		
+		Conexion con = null;
+	}
+
+}

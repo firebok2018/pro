@@ -1,0 +1,47 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import model.Usuarios;
+import utils.Conexion;
+
+public class ConexionSign_In {
+	
+	public boolean SignIn(Usuarios user){
+		PreparedStatement ps= null;
+		Connection cn = null;
+		ResultSet rs = null;
+		String sql="select*from tb_Usuario where usuario = ? and clave = ?";
+		try {
+			cn = new Conexion().getConexion();
+			ps= cn.prepareStatement(sql);
+			ps.setString(1, user.getUsuario());
+			ps.setString(2, user.getPassword());
+			rs= ps.executeQuery();
+			if(rs.next()){
+				if(user.getPassword().equals(rs.getString(3))){
+					user.setIdUser(rs.getInt(0));
+					user.setUsuario(rs.getString(2));
+					user.setTipo(rs.getInt(8));
+					return true;
+				}else{
+					return false;
+				}
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			return false;
+		}
+	
+		
+	}
+
+}
+
+
+

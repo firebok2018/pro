@@ -1,0 +1,52 @@
+package ui;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+
+public class JIFPriveligos extends JInternalFrame {
+	private JCheckBox chckbxNewCheckBox;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			JIFPriveligos dialog = new JIFPriveligos();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public JIFPriveligos() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		{
+			JLabel lblTipoDeUsuario = new JLabel("Tipo de Usuario:");
+			lblTipoDeUsuario.setBounds(0, 29, 102, 14);
+			getContentPane().add(lblTipoDeUsuario);
+		}
+		{
+			JComboBox comboBox = new JComboBox();
+			comboBox.setBounds(112, 26, 93, 20);
+			getContentPane().add(comboBox);
+		}
+		
+		chckbxNewCheckBox = new JCheckBox("New check box");
+		chckbxNewCheckBox.setBounds(36, 71, 97, 23);
+		getContentPane().add(chckbxNewCheckBox);
+	}
+}

@@ -1,0 +1,77 @@
+package ui;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
+
+public class JIFPriveligos extends JInternalFrame {
+	private JCheckBox chckbxConfiguracn;
+	private JCheckBox chckbxAgregarMesa;
+	private JCheckBox chckbxNewCheckBox;
+	private JCheckBox chckbxConfigurarPrecios;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			JIFPriveligos dialog = new JIFPriveligos();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public JIFPriveligos() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		{
+			JLabel lblTipoDeUsuario = new JLabel("Tipo de Usuario:");
+			lblTipoDeUsuario.setBounds(33, 29, 102, 14);
+			getContentPane().add(lblTipoDeUsuario);
+		}
+		{
+			JComboBox comboBox = new JComboBox();
+			comboBox.setBounds(145, 26, 93, 20);
+			getContentPane().add(comboBox);
+		}
+		
+		chckbxConfiguracn = new JCheckBox("Configurac\u00F3n");
+		chckbxConfiguracn.setBounds(38, 75, 97, 23);
+		getContentPane().add(chckbxConfiguracn);
+		
+		chckbxAgregarMesa = new JCheckBox("Agregar mesa");
+		chckbxAgregarMesa.setBounds(38, 101, 97, 23);
+		getContentPane().add(chckbxAgregarMesa);
+		
+		chckbxNewCheckBox = new JCheckBox("Modificar Productos");
+		chckbxNewCheckBox.setBounds(38, 129, 141, 23);
+		getContentPane().add(chckbxNewCheckBox);
+		
+		chckbxConfigurarPrecios = new JCheckBox("Configurar precios");
+		chckbxConfigurarPrecios.setBounds(181, 75, 146, 23);
+		getContentPane().add(chckbxConfigurarPrecios);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(109, 202, 89, 23);
+		getContentPane().add(btnAceptar);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(238, 202, 89, 23);
+		getContentPane().add(btnCancelar);
+	}
+}

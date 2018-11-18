@@ -1,0 +1,48 @@
+package ui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class JIFActu_Mesa extends JInternalFrame {
+	private JLabel lblNumeroDeMesa;
+	private JComboBox comboBox;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JIFActu_Mesa frame = new JIFActu_Mesa();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JIFActu_Mesa() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		
+		lblNumeroDeMesa = new JLabel("Numero de mesa:");
+		lblNumeroDeMesa.setBounds(10, 11, 105, 14);
+		getContentPane().add(lblNumeroDeMesa);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar"}));
+		comboBox.setBounds(104, 8, 94, 20);
+		getContentPane().add(comboBox);
+
+	}
+}

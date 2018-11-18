@@ -1,0 +1,29 @@
+package model;
+
+import javax.swing.JLabel;
+
+import view.JDSign_up;
+
+public class TimerConxion  extends Thread{
+	JLabel time;
+	public TimerConxion(JLabel timer){
+		this.time=timer;
+	}
+	public void run(){
+		try {
+			int x = 0;
+			while (JDSign_up.Time) {
+				Thread.sleep(1000);
+				System.out.println(x);
+				TimeStart(x);
+				x++;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public void start(JLabel tiempo) {
+		// TODO Auto-generated method stub
+		
+	}
+}

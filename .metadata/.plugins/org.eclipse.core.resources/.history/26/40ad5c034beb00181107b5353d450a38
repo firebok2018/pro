@@ -1,0 +1,52 @@
+package ui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class JIFRegistroPedido extends JInternalFrame {
+	private JLabel lblNPedido;
+	private JTextField txtNumPed;
+	private JLabel lblTipo;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JIFRegistroPedido frame = new JIFRegistroPedido();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JIFRegistroPedido() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
+		
+		lblNPedido = new JLabel("N\u00B0 Pedido:");
+		lblNPedido.setBounds(21, 28, 60, 14);
+		getContentPane().add(lblNPedido);
+		
+		txtNumPed = new JTextField();
+		txtNumPed.setBounds(91, 25, 86, 20);
+		getContentPane().add(txtNumPed);
+		txtNumPed.setColumns(10);
+		
+		lblTipo = new JLabel("Tipo ");
+		lblTipo.setBounds(21, 57, 46, 14);
+		getContentPane().add(lblTipo);
+
+	}
+
+}

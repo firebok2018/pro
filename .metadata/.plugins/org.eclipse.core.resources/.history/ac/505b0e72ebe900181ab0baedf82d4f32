@@ -1,0 +1,21 @@
+package ConexionDatabase;
+
+import java.sql.PreparedStatement;
+
+import model.Usuarios;
+
+public class ConexionSign_In {
+	PreparedStatement ps=null;
+	public Usuarios validaUsuario(String usuario, String clave) {
+		 String sql = "select * from tb_usuarios where usuario = ? and clave = ?";
+		 pst = con.prepareStatement(sql);
+
+		 pst.setString(1, usuario);
+		 pst.setString(2, clave);
+
+	return 5;
+}
+}
+
+
+

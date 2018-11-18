@@ -1,0 +1,10 @@
+package model;
+
+import javax.swing.JLabel;
+
+public class TimerConxion  extends Thread{
+	JLabel time;
+	public TimerConxion(JLabel timer){
+		this.time=timer;
+	}
+}
